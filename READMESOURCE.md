@@ -18,7 +18,7 @@ Standard pairs trading models rely on simple distance-based metrics, such as Z-s
 
 
 To solve this, the engine completely abandons arbitrary indicators. Instead, it formalizes the cointegrated relationship between the two assets using the Ornstein-Uhlenbeck (OU) stochastic process. The spread is modeled via the stochastic differential equation: 
-[cite_start]$dX_{t}=\mu(\theta-X_{t})dt+\sigma dW_{t}$[cite: 26].
+$dX_{t}=\mu(\theta-X_{t})dt+\sigma dW_{t}$.
 
 By treating the trade lifecycle as an optimal double stopping problem, the algorithm dynamically extracts the equilibrium mean ($\theta$), the reversion velocity ($\mu$), and the instantaneous volatility ($\sigma$)  Crucially, the Leung and Li (2015) framework ensures viability by explicitly incorporating fixed transaction costs directly into the Hamilton-Jacobi-Bellman (HJB) variational inequalities[cite: 40]. [cite_start]The algorithm mathematically guarantees that a trade is only executed when the expected reversion strictly exceeds the broker's spread.
 
@@ -29,7 +29,7 @@ By treating the trade lifecycle as an optimal double stopping problem, the algor
 **Primary Source:** [*On the Efficacy of Optimized Exit Rule for Mean Reversion Trading* (Lee & Leung, 2020)](https://ideas.repec.org/a/wsi/ijfexx/v07y2020i03ns2424786320500243.html)
 
 **The Engineering Problem:**
-Even if a spread is perfectly cointegrated, its mathematical "half-life" (the time it takes to revert to the mean) can span several days or weeks. [cite_start]Retail traders passively wait for the spread to hit the exact equilibrium ($\theta$), which locks up margin, incurs massive overnight swap fees, and exposes the portfolio to sudden macroeconomic shocks[cite: 63, 256].
+Even if a spread is perfectly cointegrated, its mathematical "half-life" (the time it takes to revert to the mean) can span several days or weeks. Retail traders passively wait for the spread to hit the exact equilibrium ($\theta$), which locks up margin, incurs massive overnight swap fees, and exposes the portfolio to sudden macroeconomic shocks.
 
 **The Academic Application:**
 This codebase utilizes the findings of Lee and Leung (2020) to entirely bypass the half-life trap. Their research demonstrates that dynamically optimizing the exit rule—rather than passively waiting for a complete reversion to the mean—drastically improves the annualized return profile.
