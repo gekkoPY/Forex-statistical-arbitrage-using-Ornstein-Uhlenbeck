@@ -16,7 +16,6 @@ Standard pairs trading models rely on simple distance-based metrics, such as Z-s
 
 **The Academic Application:**
 
-**Primary Source:** [*On the Efficacy of Optimized Exit Rule for Mean Reversion Trading* (Lee & Leung, 2020)](https://ideas.repec.org/a/wsi/ijfexx/v07y2020i03ns2424786320500243.html)
 
 To solve this, the engine completely abandons arbitrary indicators. Instead, it formalizes the cointegrated relationship between the two assets using the Ornstein-Uhlenbeck (OU) stochastic process. The spread is modeled via the stochastic differential equation: 
 [cite_start]$dX_{t}=\mu(\theta-X_{t})dt+\sigma dW_{t}$[cite: 26].
@@ -26,7 +25,8 @@ By treating the trade lifecycle as an optimal double stopping problem, the algor
 ---
 
 ### 2. Solving Capital Lock-Up via Optimal Stopping
-[cite_start]**Primary Source:** *On the Efficacy of Optimized Exit Rule for Mean Reversion Trading* (Lee & Leung, 2020)[cite: 17, 281].
+
+**Primary Source:** [*On the Efficacy of Optimized Exit Rule for Mean Reversion Trading* (Lee & Leung, 2020)](https://ideas.repec.org/a/wsi/ijfexx/v07y2020i03ns2424786320500243.html)
 
 **The Engineering Problem:**
 Even if a spread is perfectly cointegrated, its mathematical "half-life" (the time it takes to revert to the mean) can span several days or weeks. [cite_start]Retail traders passively wait for the spread to hit the exact equilibrium ($\theta$), which locks up margin, incurs massive overnight swap fees, and exposes the portfolio to sudden macroeconomic shocks[cite: 63, 256].
