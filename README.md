@@ -54,8 +54,8 @@ The baseline engine was backtested on the **EUR/USD** and **GBP/USD** spread ove
 ## 📚 Academic Foundations
 
 The mathematical logic driving this algorithm relies heavily on peer-reviewed literature regarding capacity-constrained alpha in market microstructure. The core Ornstein-Uhlenbeck parameter estimation and HJB optimal stopping boundaries are direct practical applications of the frameworks presented in:
-* [cite_start]*Optimal Mean Reversion Trading with Transaction Costs and Stop-Loss Exit* (Leung & Li, 2015).
-* [cite_start]*On the Efficacy of Optimized Exit Rule for Mean Reversion Trading* (Lee & Leung, 2020).
+* *Optimal Mean Reversion Trading with Transaction Costs and Stop-Loss Exit* (Leung & Li, 2015).
+* *On the Efficacy of Optimized Exit Rule for Mean Reversion Trading* (Lee & Leung, 2020).
 
 ## ⚠️ Disclaimer
 *This repository is for educational and quantitative research purposes only. Algorithmic trading involves significant risk. The author is not responsible for any financial losses incurred from deploying this logic in live market environments.*
