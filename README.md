@@ -9,15 +9,15 @@
 Traditional pairs trading relies on static Z-scores and arbitrary standard deviation bands, which frequently fail in live markets due to structural macro-divergence and the velocity of mean reversion. This engine discards standard technical analysis in favor of rigorous statistical mechanics.
 
 1. **Cointegration Verification:** The engine extracts historical M15 tick data and deploys the **Engle-Granger two-step method** (via `statsmodels`). It calculates the exact hedge ratio and runs an Augmented Dickey-Fuller (ADF) test on the residuals, terminating execution if the spread is a random walk.
-2. [cite_start]**Ornstein-Uhlenbeck (OU) Process:** The spread is mathematically modeled using the continuous stochastic differential equation: $dX_{t}=\mu(\theta-X_{t})dt+\sigma dW_{t}$[cite: 26]. 
+2. **Ornstein-Uhlenbeck (OU) Process:** The spread is mathematically modeled using the continuous stochastic differential equation: $dX_{t}=\mu(\theta-X_{t})dt+\sigma dW_{t}$. 
 3. **AR(1) Parameter Estimation:** To optimize computational efficiency without numerical solver drift, the continuous OU process is translated into a discrete Autoregressive AR(1) model. The engine uses Ordinary Least Squares (OLS) regression to extract the exact Maximum Likelihood Estimation (MLE) parameters for equilibrium ($\theta$), reversion velocity ($\mu$), and volatility ($\sigma$).
 
 ## 🛡️ Retail Viability & Execution Logic
 
 Algorithmic pairs trading typically collapses in retail environments due to the transaction cost of crossing the bid-ask spread on two separate assets. This codebase solves the friction mathematically.
 
-* **Explicit Friction Immunization:** The entry logic calculates a "no-trade region" by explicitly factoring in the combined retail spread cost (e.g., 3.0 pips). [cite_start]The algorithm will only trigger an execution when the mathematical deviation strictly exceeds both the equilibrium standard deviation *and* the predefined transaction friction[cite: 40].
-* **HJB Early Exit (Solving Capital Lock-up):** The half-life of major FX pairs (EUR/USD & GBP/USD) can routinely exceed 6 days. [cite_start]Passively waiting for a full reversion to the mean ($\theta$) destroys annualized yield and exposes the portfolio to tail-risk[cite: 36, 37]. [cite_start]This algorithm utilizes dynamic optimal exit boundaries derived from Hamilton-Jacobi-Bellman equations, capturing the high-velocity portion of the snap-back and liquidating the portfolio days before the trend exhausts[cite: 37].
+* **Explicit Friction Immunization:** The entry logic calculates a "no-trade region" by explicitly factoring in the combined retail spread cost (e.g., 3.0 pips). The algorithm will only trigger an execution when the mathematical deviation strictly exceeds both the equilibrium standard deviation *and* the predefined transaction friction.
+* **HJB Early Exit (Solving Capital Lock-up):** The half-life of major FX pairs (EUR/USD & GBP/USD) can routinely exceed 6 days. Passively waiting for a full reversion to the mean ($\theta$) destroys annualized yield and exposes the portfolio to tail-risk. This algorithm utilizes dynamic optimal exit boundaries derived from Hamilton-Jacobi-Bellman equations, capturing the high-velocity portion of the snap-back and liquidating the portfolio days before the trend exhausts.
 
 ## 📊 Performance Metrics (Out-of-Sample)
 
@@ -53,9 +53,9 @@ The baseline engine was backtested on the **EUR/USD** and **GBP/USD** spread ove
 
 ## 📚 Academic Foundations
 
-[cite_start]The mathematical logic driving this algorithm relies heavily on peer-reviewed literature regarding capacity-constrained alpha in market microstructure[cite: 8]. The core Ornstein-Uhlenbeck parameter estimation and HJB optimal stopping boundaries are direct practical applications of the frameworks presented in:
-* [cite_start]*Optimal Mean Reversion Trading with Transaction Costs and Stop-Loss Exit* (Leung & Li, 2015)[cite: 17, 22].
-* [cite_start]*On the Efficacy of Optimized Exit Rule for Mean Reversion Trading* (Lee & Leung, 2020)[cite: 17, 36].
+The mathematical logic driving this algorithm relies heavily on peer-reviewed literature regarding capacity-constrained alpha in market microstructure. The core Ornstein-Uhlenbeck parameter estimation and HJB optimal stopping boundaries are direct practical applications of the frameworks presented in:
+* [cite_start]*Optimal Mean Reversion Trading with Transaction Costs and Stop-Loss Exit* (Leung & Li, 2015).
+* [cite_start]*On the Efficacy of Optimized Exit Rule for Mean Reversion Trading* (Lee & Leung, 2020).
 
 ## ⚠️ Disclaimer
 *This repository is for educational and quantitative research purposes only. Algorithmic trading involves significant risk. The author is not responsible for any financial losses incurred from deploying this logic in live market environments.*
